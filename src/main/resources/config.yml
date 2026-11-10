@@ -1,0 +1,97 @@
+# ------------------------------------------------------------------
+# Where duels happen
+# ------------------------------------------------------------------
+# If RTPMenu is installed and this is true, the duel world, radius and centre are read from
+# RTPMenu's config (destinations.<rtp-destination>), so duels always happen in the same world
+# that "/rtp overworld" sends you to. (Old JalebiRTP is also supported.)
+use-rtp-plugin-config: true
+rtp-destination: overworld
+
+# Used only when RTPMenu is missing or use-rtp-plugin-config is false
+world-name: economy
+search-radius: 3000
+
+debug: false   # prints extra info to console (helps find teleport problems)
+
+# Command run (as the player) to send people to spawn after a duel
+spawn-command: "warp spawn"
+fallback-world: world
+
+# ------------------------------------------------------------------
+# Biomes
+# ------------------------------------------------------------------
+# Duels only start in these biomes (flat-ish land)
+allowed-biomes:
+  - plains
+  - sunflower_plains
+  - meadow
+  - desert
+  - savanna
+  - badlands
+  - eroded_badlands
+  - wooded_badlands
+  - snowy_plains
+
+# Any biome whose id CONTAINS one of these words is never used (safety net)
+blocked-biomes:
+  - ocean
+  - river
+  - swamp
+  - mangrove
+  - jungle
+  - pale_garden
+  - beach
+
+# The area around the spot must be flat: max height difference (in blocks) inside +/- flat-check-radius
+flat-check-radius: 16
+max-height-diff: 5
+max-search-attempts: 1500   # 2 attempts per tick
+
+# ------------------------------------------------------------------
+# Duel
+# ------------------------------------------------------------------
+spawn-distance: 8          # each player spawns this far from the centre, on opposite sides (0 = exact same block)
+countdown-seconds: 3
+loser-spectator-seconds: 5
+collect-seconds: 90        # winner's time to pick up the loser's items
+
+# If the winner gets further than this from where the loser died (or changes world, e.g. by
+# using /rtp), the collect timer is removed and they are NOT sent to spawn.
+collect-leave-distance: 100
+
+accent-color: "#00a2ff"
+
+icons:
+  sword: "⚔"
+  skull: "☠"
+  trophy: "🏆"
+
+# Blocked ONLY while fighting (and for the loser's 5s spectator time). Not blocked while collecting.
+blocked-commands:
+  - tpa
+  - tpaccept
+  - tpahere
+  - tpyes
+  - tpno
+  - tpdeny
+  - tpcancel
+  - rtp
+  - randomtp
+  - jalebirtp
+  - home
+  - homes
+  - warp
+  - warps
+  - spawn
+  - back
+  - tp
+  - tphere
+  - sethome
+  - rtpq
+  - rtpqueue
+  - etpa
+  - etpaccept
+  - etpahere
+  - ertp
+  - ehome
+  - ewarp
